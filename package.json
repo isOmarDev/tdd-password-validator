@@ -1,0 +1,32 @@
+{
+  "name": "tdd-password-validator",
+  "version": "1.0.0",
+  "description": "A simple Password Validator built using Test-Driven Development (TDD). The goal of the project is to practice writing tests first, then implementing the validation logic to make the tests pass.",
+  "main": "password-validator.ts",
+  "type": "module",
+  "scripts": {
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/isOmarDev/tdd-password-validator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/isOmarDev/tdd-password-validator/issues"
+  },
+  "homepage": "https://github.com/isOmarDev/tdd-password-validator#readme",
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.10.1",
+    "jest": "^30.2.0",
+    "ts-jest": "^29.4.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}
