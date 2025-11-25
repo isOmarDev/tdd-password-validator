@@ -40,4 +40,22 @@ describe('password validator', () => {
       }
     );
   });
+
+  describe('password contains upper case letter', () => {
+    it('should return "MissingUppercase" error type if password doesnt contain at least one uppercase letter', () => {
+      expect(
+        PasswordValidator.validate('omarismail1')?.valid
+      ).toBeTruthy();
+      expect(
+        PasswordValidator.validate('omarismail1')?.errors
+      ).toHaveLength(1);
+      expect(
+        PasswordValidator.validate('omarismail1')?.errors[0]
+      ).toBe('MissingUppercase');
+      expect(PasswordValidator.validate('omarismail1')).toEqual({
+        valid: true,
+        errors: ['MissingUppercase'],
+      });
+    });
+  });
 });

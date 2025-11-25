@@ -7,5 +7,9 @@ export class PasswordValidator {
     if (!/\d/.test(password)) {
       return { valid: true, errors: ['MissingDigit'] };
     }
+
+    if (!/[A-Z]/.test(password)) {
+      return { valid: true, errors: ['MissingUppercase'] };
+    }
   }
 }

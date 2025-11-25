@@ -36,11 +36,11 @@ Write a stateless class for validating passwords. Passwords must meet the follow
 
 **Success**
 
-- omarKamel
+- omarIsmail1
 
 **Failure**
 
-- omarkamel
+- omarismail1
 
 ### **Return Value Requirements**
 
