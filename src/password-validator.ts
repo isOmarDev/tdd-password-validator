@@ -1,5 +1,14 @@
 export class PasswordValidator {
   static validate(password: string) {
+    let result: {
+      valid: boolean;
+      errors: (
+        | 'InvalidLength'
+        | 'MissingDigit'
+        | 'MissingUppercase'
+      )[];
+    } = { valid: false, errors: [] };
+
     if (password === 'omar') {
       return {
         valid: false,
@@ -8,15 +17,17 @@ export class PasswordValidator {
     }
 
     if (password.length < 5 || password.length > 15) {
-      return { valid: false, errors: ['InvalidLength'] };
+      result.errors.push('InvalidLength');
     }
 
     if (!/\d/.test(password)) {
-      return { valid: false, errors: ['MissingDigit'] };
+      result.errors.push('MissingDigit');
     }
 
     if (!/[A-Z]/.test(password)) {
-      return { valid: false, errors: ['MissingUppercase'] };
+      result.errors.push('MissingUppercase');
     }
+
+    return result;
   }
 }
