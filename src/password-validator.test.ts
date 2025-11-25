@@ -2,15 +2,23 @@ import { PasswordValidator } from './password-validator';
 
 describe('password validator', () => {
   describe('password length', () => {
-    it('should return "InvalidLength" error type if length is less than 5 characters like "omar"', () => {
-      expect(PasswordValidator.validate('omar')?.valid).toBeTruthy();
-    });
+    it.each(['omar', 'omarismailkamel1'])(
+      'should return "InvalidLength" error type if length is less than 5 or more than 15 characters',
+      (value) => {
+        const password = value;
+        const errorType = 'InvalidLength';
 
-    it('should return "InvalidLength" error type if length is more than 15 characters like "omarismailkamel1', () => {
-      expect(
-        PasswordValidator.validate('omarismailkamel1')?.valid
-      ).toBeTruthy();
-    });
+        const result = PasswordValidator.validate(password);
+
+        expect(result?.valid).toBeTruthy();
+        expect(result?.errors).toHaveLength(1);
+        expect(result?.errors[0]).toBe(errorType);
+        expect(result).toEqual({
+          valid: true,
+          errors: [errorType],
+        });
+      }
+    );
   });
 
   describe('password contains digit', () => {
