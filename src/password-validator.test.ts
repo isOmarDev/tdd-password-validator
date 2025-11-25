@@ -9,7 +9,7 @@ describe('when validating password length', () => {
 
         const result = PasswordValidator.validate(password);
 
-        expect(result?.valid).toBeFalsy();
+        expect(result?.valid).toBe(false);
         expect(result?.errors).toHaveLength(1);
         expect(result?.errors[0]).toBe(errorType);
         expect(result).toEqual({
@@ -28,7 +28,7 @@ describe('when validating password length', () => {
 
         const result = PasswordValidator.validate(password);
 
-        expect(result?.valid).toBeFalsy();
+        expect(result?.valid).toBe(false);
         expect(result?.errors).toHaveLength(1);
         expect(result?.errors[0]).toBe(errorType);
         expect(result).toEqual({
@@ -46,7 +46,7 @@ describe('when validating password length', () => {
 
       const result = PasswordValidator.validate(password);
 
-      expect(result?.valid).toBeFalsy();
+      expect(result?.valid).toBe(false);
       expect(result?.errors).toHaveLength(1);
       expect(result?.errors[0]).toBe(errorType);
       expect(result).toEqual({
@@ -67,13 +67,25 @@ describe('when validating password length', () => {
 
       const result = PasswordValidator.validate(password);
 
-      expect(result?.valid).toBeFalsy();
+      expect(result?.valid).toBe(false);
       expect(result?.errors).toHaveLength(3);
       expect(result?.errors).toEqual(errorsType);
       expect(result).toEqual({
         valid: false,
         errors: errorsType,
       });
+    });
+  });
+
+  it('returns a valid result when password meets all criteria', () => {
+    expect(PasswordValidator.validate('Omar1').valid).toBe(true);
+    expect(PasswordValidator.validate('Omar1').errors).toHaveLength(
+      0
+    );
+    expect(PasswordValidator.validate('Omar1').errors).toEqual([]);
+    expect(PasswordValidator.validate('Omar1')).toEqual({
+      valid: true,
+      errors: [],
     });
   });
 });
