@@ -24,13 +24,13 @@ Write a stateless class for validating passwords. Passwords must meet the follow
 
 **Success**
 
-- omar1
+- Omar1
 - omarKamel1991
 
 **Failure**
 
-- omarkamel
-- omarIsmailKamel
+- omarKamel
+- omar_smailKamel
 
 ### **Contains at least one upper case letter**
 
