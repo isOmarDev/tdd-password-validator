@@ -26,6 +26,16 @@ describe('password validator', () => {
       expect(
         PasswordValidator.validate('omarkamel')?.valid
       ).toBeTruthy();
+      expect(
+        PasswordValidator.validate('omarkamel')?.errors
+      ).toHaveLength(1);
+      expect(PasswordValidator.validate('omarkamel')?.errors[0]).toBe(
+        'MissingDigit'
+      );
+      expect(PasswordValidator.validate('omarkamel')).toEqual({
+        valid: true,
+        errors: ['MissingDigit'],
+      });
     });
   });
 });
