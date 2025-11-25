@@ -77,15 +77,18 @@ describe('when validating password length', () => {
     });
   });
 
-  it('returns a valid result when password meets all criteria', () => {
-    expect(PasswordValidator.validate('Omar1').valid).toBe(true);
-    expect(PasswordValidator.validate('Omar1').errors).toHaveLength(
-      0
-    );
-    expect(PasswordValidator.validate('Omar1').errors).toEqual([]);
-    expect(PasswordValidator.validate('Omar1')).toEqual({
-      valid: true,
-      errors: [],
-    });
-  });
+  it.each(['omar_Kamel1', 'omar1smailKamel', 'Omar1'])(
+    'returns a valid result when password meets all criteria',
+    (password) => {
+      const result = PasswordValidator.validate(password);
+
+      expect(result.valid).toBe(true);
+      expect(result.errors).toHaveLength(0);
+      expect(result.errors).toEqual([]);
+      expect(result).toEqual({
+        valid: true,
+        errors: [],
+      });
+    }
+  );
 });
