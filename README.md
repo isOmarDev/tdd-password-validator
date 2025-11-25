@@ -1,6 +1,6 @@
 # TDD Password Validator
 
-A simple Password Validator built using Test-Driven Development (TDD).
+A simple Password Validator built using Test-Driven Development (TDD) by wishful thinking.
 
 ## Project Overview (TDD)
 
@@ -57,7 +57,7 @@ tdd-password-validator/
 
 ## Approach
 
-This project follows the classic TDD cycle:
+This project follows the classic TDD cycle by the wishful thinking technique :
 
 1. Write a failing test (_Red_)
 2. Write the minimal code to make the test pass (_Green_)
@@ -125,10 +125,3 @@ errors: string[]
 
 - result: true if the password passes all rules
 - errors: A list of all validation errors (empty if valid)
-
-## Learning Goals
-
-- Practice real-world TDD workflow
-- Improve test-driven thinking
-- Learn how to return structured validation errors
-- Build predictable and maintainable code
