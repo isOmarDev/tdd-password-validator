@@ -43,18 +43,17 @@ describe('password validator', () => {
 
   describe('password contains upper case letter', () => {
     it('should return "MissingUppercase" error type if password doesnt contain at least one uppercase letter', () => {
-      expect(
-        PasswordValidator.validate('omarismail1')?.valid
-      ).toBeTruthy();
-      expect(
-        PasswordValidator.validate('omarismail1')?.errors
-      ).toHaveLength(1);
-      expect(
-        PasswordValidator.validate('omarismail1')?.errors[0]
-      ).toBe('MissingUppercase');
-      expect(PasswordValidator.validate('omarismail1')).toEqual({
+      const password = 'omarismail1';
+      const errorType = 'MissingUppercase';
+
+      const result = PasswordValidator.validate(password);
+
+      expect(result?.valid).toBeTruthy();
+      expect(result?.errors).toHaveLength(1);
+      expect(result?.errors[0]).toBe(errorType);
+      expect(result).toEqual({
         valid: true,
-        errors: ['MissingUppercase'],
+        errors: [errorType],
       });
     });
   });
