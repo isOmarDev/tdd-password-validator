@@ -4,7 +4,7 @@ export class PasswordValidator {
       return { valid: true, errors: ['InvalidLength'] };
     }
 
-    if (password === 'omarkamel') {
+    if (!/\d/.test(password)) {
       return { valid: true, errors: ['MissingDigit'] };
     }
   }
