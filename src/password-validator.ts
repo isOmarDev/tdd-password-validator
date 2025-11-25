@@ -25,6 +25,11 @@ export class PasswordValidator {
       result.errors.push('MissingUppercase');
     }
 
+    if (result.errors.length === 0) {
+      result.valid = true;
+      return result;
+    }
+
     return result;
   }
 }
