@@ -49,5 +49,4 @@ export class PasswordValidator {
   }
 }
 
-console.log(PasswordValidator.validate('Oma1'));
-console.log(PasswordValidator.validate('Omaaa'));
+console.log(PasswordValidator.validate('omarkamel'));

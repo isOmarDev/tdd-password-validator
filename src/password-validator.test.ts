@@ -1,84 +1,8 @@
 import { PasswordValidator } from './password-validator';
 
-describe('when validating password length', () => {
-  describe('password length', () => {
-    it.each(['Oma1', 'OmarIsmailkamel1'])(
-      'returns "InvalidLength" when password length is outside 5–15 characters',
-      (password) => {
-        const errorType = 'InvalidLength';
-
-        const result = PasswordValidator.validate(password);
-
-        expect(result?.valid).toBe(false);
-        expect(result?.errors).toHaveLength(1);
-        expect(result?.errors[0]).toBe(errorType);
-        expect(result).toEqual({
-          valid: false,
-          errors: [errorType],
-        });
-      }
-    );
-  });
-
-  describe('when validating password digits', () => {
-    it.each(['omarKamel', 'omar_smailKamel'])(
-      'returns "MissingDigit" when the password does not contain at least one digit',
-      (password) => {
-        const errorType = 'MissingDigit';
-
-        const result = PasswordValidator.validate(password);
-
-        expect(result?.valid).toBe(false);
-        expect(result?.errors).toHaveLength(1);
-        expect(result?.errors[0]).toBe(errorType);
-        expect(result).toEqual({
-          valid: false,
-          errors: [errorType],
-        });
-      }
-    );
-  });
-
-  describe('when validating uppercase letters', () => {
-    it('returns "MissingUppercase" when the password has no uppercase characters', () => {
-      const password = 'omarismail1';
-      const errorType = 'MissingUppercase';
-
-      const result = PasswordValidator.validate(password);
-
-      expect(result?.valid).toBe(false);
-      expect(result?.errors).toHaveLength(1);
-      expect(result?.errors[0]).toBe(errorType);
-      expect(result).toEqual({
-        valid: false,
-        errors: [errorType],
-      });
-    });
-  });
-
-  describe('when validating all criteria', () => {
-    it('returns ["InvalidLength", "MissingDigit", "MissingUppercase"] when the password has not met  all criteria', () => {
-      const password = 'omar';
-      const errorsType = [
-        'InvalidLength',
-        'MissingDigit',
-        'MissingUppercase',
-      ];
-
-      const result = PasswordValidator.validate(password);
-
-      expect(result?.valid).toBe(false);
-      expect(result?.errors).toHaveLength(3);
-      expect(result?.errors).toEqual(errorsType);
-      expect(result).toEqual({
-        valid: false,
-        errors: errorsType,
-      });
-    });
-  });
-
+describe('password validator', () => {
   it.each(['omar_Kamel1', 'omar1smailKamel', 'Omar1'])(
-    'returns a valid result when password meets all criteria',
+    'returns a success result when "%s" meets all criteria',
     (password) => {
       const result = PasswordValidator.validate(password);
 
@@ -91,4 +15,75 @@ describe('when validating password length', () => {
       });
     }
   );
+
+  describe('checks between 5 - 15 characters', () => {
+    it.each([
+      ['Oma1', false, ['InvalidLength']],
+      ['OmarIsmailkamel1', false, ['InvalidLength']],
+    ])(
+      'returns "InvalidLength" error when password "%s" has invalid length',
+      (input, isValid, errors) => {
+        const result = PasswordValidator.validate(input);
+
+        expect(result.valid).toBe(isValid);
+        expect(result.errors).toHaveLength(1);
+        expect(result.errors).toEqual(errors);
+      }
+    );
+  });
+
+  describe('checks for at least one digit', () => {
+    it.each([
+      ['omarKamel', false, ['MissingDigit']],
+      ['omar_smailKamel', false, ['MissingDigit']],
+    ])(
+      'returns "MissingDigit" error when password "%s" has no digits',
+      (input, isValid, errors) => {
+        const result = PasswordValidator.validate(input);
+
+        expect(result.valid).toBe(isValid);
+        expect(result.errors).toHaveLength(1);
+        expect(result.errors).toEqual(errors);
+      }
+    );
+  });
+
+  describe('checks for at least one uppercase letter', () => {
+    it.each([
+      ['omar1', false, ['MissingUppercase']],
+      ['omarismail1', false, ['MissingUppercase']],
+    ])(
+      'returns "MissingUppercase" error when password "%s" has no uppercase letters',
+      (input, isValid, errors) => {
+        const result = PasswordValidator.validate(input);
+
+        expect(result.valid).toBe(isValid);
+        expect(result.errors).toHaveLength(1);
+        expect(result.errors).toEqual(errors);
+      }
+    );
+  });
+
+  describe('checks for muliple errors', () => {
+    it.each([
+      ['omar1', false, ['MissingUppercase']],
+      ['omarkamel', false, ['MissingDigit', 'MissingUppercase']],
+      [
+        'omar',
+        false,
+        ['MissingDigit', 'InvalidLength', 'MissingUppercase'],
+      ],
+    ])(
+      'returns "%s" as "%s" with %p errors',
+      (input, valid, errors) => {
+        const result = PasswordValidator.validate(input);
+
+        expect(result.valid).toBe(valid);
+        expect(result.errors).toHaveLength(errors.length);
+        result.errors.forEach((error) => {
+          expect(errors).toContain(error);
+        });
+      }
+    );
+  });
 });
